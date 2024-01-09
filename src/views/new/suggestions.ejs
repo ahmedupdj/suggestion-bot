@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/index.css">
+  <title>Settings</title>
+
+  <style>
+   
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Settings</h1>
+  </header>
+
+  <main>
+    <div id="notification-bar" class="notification-bar">
+        <% if (alert) { %>
+          <%= alert %>
+        <% } %>
+      </div>
+
+      <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function () {
+          // Select the notification bar element
+          var notificationBar = document.getElementById("notification-bar");
+      
+          // Check if the notification bar exists
+          if (notificationBar) {
+            // Set a timeout to hide the notification bar after 5000 milliseconds (adjust as needed)
+            setTimeout(function () {
+              notificationBar.style.top = "-50px"; // Move the notification bar off the screen
+            }, 1000);
+          }
+        });
+      </script>
+    <form action="/dashboard/<%= guild.id %>/suggestions" method="post">
+
+        <label for="suggestionChannel" style="color: #fff;">Suggestion Channel:</label>
+        <select name="suggestionChannel" id="suggestionChannel" class="p-input">
+          <% guild.channels.cache.filter(channel => channel.type === 'text').forEach(channel => { %>
+            <option value="<%= channel.id %>"><%= channel.name %></option>
+          <% }); %>
+        </select>
+  
+       
+        </select>
+  
+
+  
+        <div class="customize">
+            <h2 style="color: #fff;">Customize Your Embed</h2>
+            <br>
+            <p style="color: #fff;"><input type="color" name="color" value="<%= settings.suggestion.suggestioncolor %>">&nbsp; Embed Color</p>
+            <br>
+            <p style="color: #fff;"><bold>Embed Description</bold></p>
+            <textarea  name="description" id="myInput" placeholder="Your Description" rows="3" wrap="soft" class="col-12 form-control" maxlength="1024" type="text" style="max-width: 400px; min-width: 400px;
+            max-height:200px; background-color: #0f0f0f; color: white;" ><%= settings.suggestion.description || `{suggestion}`%></textarea>
+            <small id="textareaHide"class="form-text text-muted" style="color: white"></small>
+            <br>
+            <br>
+            <p style="color: #fff;"><bold>Embed Footer</bold></p>
+            <input name="footer" class="form-control" value="<%= settings.suggestion.footer ||`Requested by {user_tag}`%>" style="background-color: #0a0a0a; width: 400px; color: white" type="text"/>
+            <br>
+
+            <p style="color: #fff;">Choose your reaction</p>
+            <% if(settings.suggestion.reaction == "1") {%>
+            <div class="form-check">
+              <input value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+              <label style="color:white" class="form-check-label" for="flexRadioDefault1">
+                
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="2" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                👍 - 👎
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="3" class="form-check-input" type="radio" name="flexRadioDefault" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                ✅ - ❌
+              </label>
+            </div>
+            <% } else if(settings.suggestion.reaction == "2") {%>
+            <div class="form-check">
+           
+              <label style="color:white" class="form-check-label" for="flexRadioDefault1">
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="2" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                👍 - 👎
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="3" class="form-check-input" type="radio" name="flexRadioDefault" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                ✅ - ❌
+              </label>
+            </div>
+            <% } else if(settings.suggestion.reaction == "3") { %>
+            <div class="form-check">
+              <input value="1"  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label style="color:white" class="form-check-label" for="flexRadioDefault1">
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="2" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                👍 - 👎
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input value="3" class="form-check-input" type="radio" name="flexRadioDefault" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                ✅ - ❌
+              </label>
+            </div>
+            <% } else { %>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+              <label style="color:white" class="form-check-label" for="flexRadioDefault1">
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                👍 - 👎
+              </label>
+            </div>
+            <div class="form-check" style="color: white">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" >
+              <label class="form-check-label" for="flexRadioDefault2">
+                ✅ - ❌
+              </label>
+            </div>
+            <% } %>
+            <br>
+          
+        <button type="submit">Save Changes</button> <a class="mainbtn" href="/">home</a>
+      </form>
+      <br>
+
+  </main>
+  <br> <br> <br>
+  <footer>
+    &copy; 2024 Your Website Name
+  </footer>
+
+</body>
+<div class="loading-container" id="loadingContainer">
+    <div class="loader"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+
+
+
+
+<style>
+    .loading-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #0a0a0a;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+
+.loader {
+display: flex;
+justify-content: center;
+}
+
+.bar {
+width: 7px;
+height: 18px;
+margin: 0 9px;
+border-radius: 10px;
+animation: loading_5192 1s ease-in-out infinite;
+background-color: aqua;
+}
+
+.bar:nth-child(1) {
+animation-delay: 0.01s;
+}
+
+.bar:nth-child(2) {
+animation-delay: 0.09s;
+}
+
+.bar:nth-child(3) {
+animation-delay: 0.19s;
+}
+
+.bar:nth-child(4) {
+animation-delay: 0.29s;
+}
+
+@keyframes loading_5192 {
+0% {
+transform: scale(1);
+}
+
+20% {
+transform: scale(1, 2.5);
+}
+
+40% {
+transform: scale(1);
+}
+}
+</style>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+var loadingContainer = document.getElementById("loadingContainer");
+// تأخير إخفاء مؤشر التحميل لمدة 3 ثوانٍ (يمكنك تغيير الفترة حسب احتياجاتك)
+setTimeout(function() {
+    loadingContainer.style.display = "none";
+}, 1500); // 3000 مللي ثانية أي 3 ثوانٍ
+}); 
+</script>

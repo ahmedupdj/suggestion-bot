@@ -1,0 +1,275 @@
+
+<head>
+  <link rel="stylesheet" href="/css/style.css"> <!-- تأكد من وجود الملف style.css في مجلد assets/css -->
+
+</head>
+<div class="content">
+
+  <center><h2 style="color: #fff;">SELECT A SERVER</h2></center>
+  
+  
+  
+  <div class="servers">
+  <% user.guilds.forEach(guild => {
+   const permsOnGuild = new perms(guild.permissions);
+   if(!permsOnGuild.has("MANAGE_GUILD")) {
+   return
+   }
+  %>
+  <% if (guild.icon) {
+   iconurl = "https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png??size=512";
+  } else {
+   iconurl = "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949";
+  }
+  %>
+  
+   
+    <% if (bot.guilds.cache.get(guild.id)) { %>
+    <div class="server">
+     <div class="icon-and-name">
+  <img class="server-icon" src="<%= iconurl %>" alt="<% guild.name %>"/>
+    <p class="guild-name"><%= guild.name %></p>
+    </div>
+      <a class="edit button" href="/dashboard/<%= guild.id %>/suggestions">Dashboard</a>
+  </div>
+    <% } %>
+  
+    <% }); %>
+    <% user.guilds.forEach(guild => {
+   const permsOnGuild = new perms(guild.permissions);
+   if(!permsOnGuild.has("MANAGE_GUILD")) {
+   return
+   }
+  %>
+  <% if (guild.icon) {
+   iconurl = "https://cdn.discordapp.com/icons/" + guild.id + "/" + guild.icon + ".png??size=512";
+  } else {
+   iconurl = "https://cdn.glitch.com/82fe990a-7942-42e3-9790-39807ccdb9f6%2Ficon-404-dark.png?v=1602427904949";
+  }
+  %>
+  
+   
+    <% if (!bot.guilds.cache.get(guild.id)) { %>
+    <div class="server">
+     <div class="icon-and-name">
+  <img class="server-icon" src="<%= iconurl %>" alt="<% guild.name %>"/>
+    <p class="guild-name"><%= guild.name %></p>
+    </div>
+   <a href='https://discord.com/api/oauth2/authorize?client_id=947952564803096676&permissions=8&scope=bot&guild_id=<%= guild.id %>' class="add button">Add Bot</a>
+  </div>
+    <% } %>
+  
+    <% }); %>
+  </div>
+  
+  
+  
+  <script>
+      function PopupCenter(e, n, t, i) {
+          var o = void 0 != window.screenLeft ? window.screenLeft : screen.left,
+              d = void 0 != window.screenTop ? window.screenTop : screen.top,
+              c = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width,
+              w = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height,
+              r = c / 2 - t / 2 + o, h = w / 2 - i / 2 + d,
+              s = window.open(e, n, "scrollbars=yes, width=" + t + ", height=" + i + ", top=" + h + ", left=" + r);
+          window.focus && s.focus()
+      }
+  </script>
+  <style>
+     body {
+      font-family: 'Arial', sans-serif;
+      background-color: #181818;
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #212121;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .servers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .server {
+      width: 250px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .server:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-and-name {
+      margin-bottom: 10px;
+    }
+
+    .server-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .guild-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-top: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .add {
+      background-color: #3498db;
+    }
+
+    .add:hover {
+      background-color: #2980b9;
+    }
+
+
+    ::-webkit-resizer {
+  background-color: #ff0000;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  display: none;
+  background-color: #aaa;
+}
+::-webkit-scrollbar-corner {
+  background-color: #aaa;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #aaa;
+  border-radius: 5px;
+  border-top: solid;
+  border-bottom: solid;
+  border-color: #aaa;
+}
+::-webkit-scrollbar-track {
+  background-color: hsla(240, 100%, 50%, 0.3);
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #0f0e0f;
+}
+
+  </style>
+    <div class="loading-container" id="loadingContainer">
+        <div class="loader"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+
+
+
+
+    <style>
+        .loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+.bar {
+  width: 7px;
+  height: 18px;
+  margin: 0 9px;
+  border-radius: 10px;
+  animation: loading_5192 1s ease-in-out infinite;
+  background-color: aqua;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0.01s;
+}
+
+.bar:nth-child(2) {
+  animation-delay: 0.09s;
+}
+
+.bar:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.bar:nth-child(4) {
+  animation-delay: 0.29s;
+}
+
+@keyframes loading_5192 {
+  0% {
+    transform: scale(1);
+  }
+
+  20% {
+    transform: scale(1, 2.5);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+    </style>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+    var loadingContainer = document.getElementById("loadingContainer");
+    // تأخير إخفاء مؤشر التحميل لمدة 3 ثوانٍ (يمكنك تغيير الفترة حسب احتياجاتك)
+    setTimeout(function() {
+        loadingContainer.style.display = "none";
+    }, 1500); // 3000 مللي ثانية أي 3 ثوانٍ
+}); 
+    </script>
