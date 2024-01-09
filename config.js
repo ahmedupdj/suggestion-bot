@@ -1,15 +1,15 @@
 module.exports = {
     bot: {
-        token: "OTQ3OTUyNTY0ODAzMDk2Njc2.GIXWO5.oSML9lN0skYvEKTAZWJcEuwuuAbTzkP32xzIiw",
+        token: "",
         prefix: ".",
         owners: ["","",""],// OWNERS ID
-        mongourl: "mongodb+srv://SpecialCodes:fedswjfnwsdefklnejf@cluster1.bfiytf1.mongodb.net/?retryWrites=true&w=majority"
+        mongourl: ""
 
     },
 
     website: {
         callback: "http://localhost:3000/callback",
-        secret: "y7yCunitYLOFEqFYOvUwxNx6Oui7SLss",
+        secret: "",
         clientID: "947952564803096676",
     },
 
