@@ -1,6 +1,6 @@
 module.exports = {
     bot: {
-        token: "",
+        token: "MTIyMDgxMzU4ODE4MTAyODkwOQ.GdZmvB.yw93SAWsCHsXRuOH-_FUr0LryOrtGeRLh4-644",
         prefix: ".",
         owners: ["","",""],// OWNERS ID
         mongourl: ""
